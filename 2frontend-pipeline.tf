@@ -405,13 +405,32 @@
 # }
 
 
+# resource "aws_s3_bucket" "frontend_artifacts" {
+#   bucket = var.S3FrontEnd
+#   acl    = "public-read"
+#   policy = data.aws_iam_policy_document.website_policy.json
+#   website {
+#     index_document = "index.html"
+#     error_document = "index.html"
+#   }
+# }
+
 resource "aws_s3_bucket" "frontend_artifacts" {
-  bucket = var.S3FrontEnd
-  acl    = "public-read"
-  policy = data.aws_iam_policy_document.website_policy.json
+  bucket         = var.S3FrontEnd
+  force_destroy  = true # Optional: Automatically deletes bucket on destroy (use cautiously)
+
   website {
     index_document = "index.html"
     error_document = "index.html"
+  }
+
+  versioning {
+    enabled = true # Optional: Enables versioning for your bucket
+  }
+
+  tags = {
+    Name        = "FrontendArtifacts"
+    Environment = "Production"
   }
 }
 data "aws_iam_policy_document" "website_policy" {
