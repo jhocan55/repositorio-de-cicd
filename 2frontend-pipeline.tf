@@ -355,7 +355,7 @@ resource "aws_codepipeline" "frontend1_pipeline" {
       ]
       configuration = {
         FullRepositoryId     = "culturadevops/angular2.git"
-        BranchName           = "master"
+        BranchName           = "main"
         ConnectionArn        = var.codestar_connector_credentials
         OutputArtifactFormat = "CODE_ZIP"
       }
