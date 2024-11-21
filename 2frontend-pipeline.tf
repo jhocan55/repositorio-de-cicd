@@ -264,9 +264,28 @@
 # }
 
 
+# resource "aws_s3_bucket" "frontend_artifacts" {
+#   bucket         = var.S3FrontEnd
+#   force_destroy  = true # Optional: Automatically deletes bucket on destroy (use cautiously)
+
+#   website {
+#     index_document = "index.html"
+#     error_document = "index.html"
+#   }
+
+#   versioning {
+#     enabled = true # Optional: Enables versioning for your bucket
+#   }
+
+#   tags = {
+#     Name        = "FrontendArtifacts"
+#     Environment = "Production"
+#   }
+# }
+
 resource "aws_s3_bucket" "frontend_artifacts" {
-  bucket         = var.S3FrontEnd
-  force_destroy  = true # Optional: Automatically deletes bucket on destroy (use cautiously)
+  bucket            = var.S3FrontEnd
+  force_destroy     = true
 
   website {
     index_document = "index.html"
@@ -274,14 +293,23 @@ resource "aws_s3_bucket" "frontend_artifacts" {
   }
 
   versioning {
-    enabled = true # Optional: Enables versioning for your bucket
+    enabled = true
   }
 
   tags = {
     Name        = "FrontendArtifacts"
     Environment = "Production"
   }
+
+  # Disable Block Public Access to allow bucket policy changes
+  public_access_block_configuration {
+    block_public_acls       = false
+    ignore_public_acls      = false
+    block_public_policy     = false
+    restrict_public_buckets = false
+  }
 }
+
 
 # Bucket Policy for Public Access (instead of ACL)
 resource "aws_s3_bucket_policy" "frontend_policy" {
