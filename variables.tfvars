@@ -1,6 +1,6 @@
 codebuild_role= "arn:aws:iam::561607169148:role/codebuild_role"
 codepipeline_role= "arn:aws:iam::561607169148:role/codepipeline_role"
-s3_terraform_pipeline= "luna-mis-despliegues-automaticos-con-terraform"
+s3_terraform_pipeline= "luna-mis-despliegues-automaticos-con-terraform-1"
 codestar_connector_credentials= 
 # "arn:aws:codestar-connections:eu-west-3:561607169148:connection/b6ff9a7d-3b60-423c-ba28-41e312ec7806"
 # S3FrontEnd="platzi-mi-frontend-automatico"
